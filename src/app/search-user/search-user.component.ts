@@ -3,7 +3,8 @@ import { FormBuilder } from '@angular/forms';
 
 import { Store, Select } from '@ngxs/store';
 import { fetchUser } from '../store/github.actions';
-import { GithubStateModel } from '../store/github.state';
+import { GithubState, GithubStateModel } from '../store/github.state';
+import { Observable } from 'rxjs';
 
 @Component({
   selector: 'app-search-user',
@@ -13,18 +14,29 @@ import { GithubStateModel } from '../store/github.state';
 export class SearchUserComponent implements OnInit {
   searchForm;
   username: string;
+  @Select(GithubState.repos) repos$: Observable<Object[]>;
+  @Select(GithubState.userName) username$: Observable<string>;
+  @Select(GithubState.avatar) avatar$: Observable<string>;
+  @Select(GithubState.isFetching) isFetching$: Observable<boolean>;
+  // @Select(GithubState.test) test$: Observable<any>;
+  test$;
+  test;
 
   constructor(
     private formBuilder: FormBuilder,
     private store: Store,
+    
   ) {
     this.searchForm = this.formBuilder.group({
       username: '',
     });
-    this.username = '';
+    // could only make it work this way
+    this.test$ = this.store.select(s => s.github.test).subscribe(a =>{
+      this.test = a;
+    });
   }
 
-  onSubmit(userData) {    
+  onSubmit(userData) {
     this.store.dispatch(new fetchUser(userData.username));
   }
 
@@ -32,8 +44,6 @@ export class SearchUserComponent implements OnInit {
     this.searchForm.reset();
   }
   
-   
-
   ngOnInit() {
   }
 

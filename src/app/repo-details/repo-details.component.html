@@ -1,0 +1,11 @@
+<h4 *ngIf="isFetching$ | async">Cargando...</h4>
+<h3>{{ currentRepo$.name }}</h3>
+
+<p>
+  Tamaño: {{ currentRepo$.size}}
+</p>
+<p>Description: {{currentRepo$.description }}</p>
+<p>
+  Commits: {{currentRepo$.commits }}
+</p>
+<a [routerLink]="['/']">Volver</a>

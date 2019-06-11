@@ -1,7 +1,13 @@
-<form [formGroup]="searchForm" (ngSubmit)="onSubmit(searchForm.value)">
+
+<div class="main-search">
+<form class="container-form" [formGroup]="searchForm" (ngSubmit)="onSubmit(searchForm.value)">
   <div>
-    <label>username</label>
-    <input type="text" formControlName="username" (click)="clearInput()">
+    <label>Ingrese nombre de usuario</label>
+    <input
+      type="text"
+      formControlName="username"
+      placeholder="username"
+      >
   </div>
 
   <button
@@ -12,3 +18,18 @@
   </button>
 
 </form>
+
+<h4 *ngIf="isFetching$ | async">Cargado...</h4>
+
+<h3>{{ userName$ | async }}</h3>
+
+<img [src]="avatar$ | async" width="100px">
+  
+<ul *ngFor="let repo of repos$ | async">
+  <li>
+    <a [routerLink]="['/repos', repo.name]">{{ repo.name }}</a>
+  </li>
+</ul>
+
+<span>{{test.login}}</span>
+</div>

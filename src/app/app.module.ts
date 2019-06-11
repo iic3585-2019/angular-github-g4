@@ -14,11 +14,14 @@ import { GithubState } from './store/github.state';
 
 import { NgxsReduxDevtoolsPluginModule } from '@ngxs/devtools-plugin';
 import { NgxsLoggerPluginModule } from '@ngxs/logger-plugin';
+import { environment } from 'src/environments/environment.prod';
+import { RepoDetailsComponent } from './repo-details/repo-details.component';
 
 @NgModule({
   declarations: [
     AppComponent,
-    SearchUserComponent
+    SearchUserComponent,
+    RepoDetailsComponent
   ],
   imports: [
     BrowserModule,
@@ -26,10 +29,13 @@ import { NgxsLoggerPluginModule } from '@ngxs/logger-plugin';
     ReactiveFormsModule,
     RouterModule.forRoot([
       { path: '', component: SearchUserComponent },
+      { path: 'repos/:repo', component: RepoDetailsComponent },
     ]),
     NgxsModule.forRoot([
       GithubState
-    ]),
+    ], {
+      developmentMode: !environment.production
+    }),
     NgxsReduxDevtoolsPluginModule.forRoot(),
     NgxsLoggerPluginModule.forRoot(),
   ],
