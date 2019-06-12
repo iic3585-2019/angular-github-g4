@@ -1,5 +1,4 @@
 h1 {
-  background-color: blue;
   color: white;
   display: inline;
   padding: 0.2em 1em;
@@ -7,8 +6,12 @@ h1 {
 }
 
 .top-bar{
-  background-color: blue;
+  background-color: black;
   display: flex;
   margin: 0em 0em 1em;
+  box-shadow: 0px 1px 2px 0px #808080c2;
 }
 
+.page-content {
+  margin: 10px;
+}

@@ -80,6 +80,11 @@ export class GithubState {
     return state.repoFetched;
   }
 
+  @Selector()
+  static userFetched(state: GithubStateModel){
+    return state.userFetched;
+  }
+
   @Action(fetchUser)
   async fetchUser(stateContext: StateContext<GithubStateModel>, action: fetchUser) {
     stateContext.patchState({ isFetching: true, userFetched: false });

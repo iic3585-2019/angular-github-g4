@@ -16,8 +16,10 @@ export class SearchUserComponent implements OnInit {
   username: string;
   @Select(GithubState.repos) repos$: Observable<Object[]>;
   @Select(GithubState.userName) username$: Observable<string>;
+  @Select(GithubState.realName) realname$: Observable<string>;
   @Select(GithubState.avatar) avatar$: Observable<string>;
   @Select(GithubState.isFetching) isFetching$: Observable<boolean>;
+  @Select(GithubState.userFetched) userFetched$: Observable<boolean>;
   // @Select(GithubState.test) test$: Observable<any>;
   test$;
   test;

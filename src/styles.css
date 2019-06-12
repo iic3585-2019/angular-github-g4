@@ -2,21 +2,57 @@
 body {
   margin:0;
   padding:0;
+  font-family: Montserrat, Calibri;
+  text-align: center;
+}
+
+label {
+  margin: 15px;
 }
 
 button {
-  background-color: blue;
+  background-color: #2ebc4f;
   color: white;
   padding: 5px 10px;
   border: none;
   display: inline-block;
   margin: 0px 5px;
+  border-radius: 2px;
   cursor: pointer;
 }
 
-app-root :not(.top-bar){
-  margin: 0.7em 1em;
+ul {
+  margin: 0;
+  padding: 0;
 }
+
+li {
+  list-style-type: none;
+}
+
+a {
+  text-decoration: none;
+}
+
+a:active, a:visited {
+  color: inherit;
+}
+
+.row {
+  display: flex;
+  justify-content: center;
+  margin: 10px;
+}
+
+.col-centered {
+  text-align: center;
+}
+
+.col {
+  text-align: left;
+}
+
+
 /* 
 app-root {
   display: flex;

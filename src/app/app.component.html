@@ -1,7 +1,9 @@
 <div class="top-bar">
-  <h1>Github User Searcher</h1>
+  <h1><a [routerLink]="['/']">Github User Searcher</a></h1>
 </div>
 
-<app-alert-button></app-alert-button>
-
+<div class="page-content">
 <router-outlet></router-outlet>
+
+<app-alert-button></app-alert-button>
+</div>

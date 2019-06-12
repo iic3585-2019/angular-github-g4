@@ -1,34 +1,44 @@
-
 <div class="main-search">
-<form class="container-form" [formGroup]="searchForm" (ngSubmit)="onSubmit(searchForm.value)">
-  <div>
-    <label>Ingrese nombre de usuario</label>
-    <input
-      type="text"
-      formControlName="username"
-      placeholder="username"
-      >
+  <div class="row">
+    <form class="container-form" [formGroup]="searchForm" (ngSubmit)="onSubmit(searchForm.value)">
+      <div>
+        <label>Ingrese nombre de usuario</label>
+        <input type="text" formControlName="username" placeholder="username">
+      </div>
+
+      <button class="button" type="submit">
+        Buscar
+      </button>
+
+    </form>
   </div>
 
-  <button
-    class="button"
-    type="submit"
-  >
-    Buscar
-  </button>
+  <h4 *ngIf="isFetching$ | async">Cargado...</h4>
 
-</form>
+  <div class="row">
+    <div class="col">
+      <img [src]="avatar$ | async" width="100px">
+    </div>
+    <div class="col-centered">
+      <h1>{{ username$ | async }}</h1>
+      <h3>{{ realname$ | async }}</h3>
+    </div>
+  </div>
 
-<h4 *ngIf="isFetching$ | async">Cargado...</h4>
+  <div class="row">
+    <h2 *ngIf="userFetched$ | async">Repositorios</h2>
+  </div>
+  <div class="row">
+    <div class="col">
+      <ul *ngFor="let repo of repos$ | async">
+        <li>
+          <a class="list-link" [routerLink]="['/repos', repo.name]">{{ repo.name }}</a>
+        </li>
+      </ul>
+    </div>
+  </div>
 
-<h3>{{ userName$ | async }}</h3>
 
-<img [src]="avatar$ | async" width="100px">
-  
-<ul *ngFor="let repo of repos$ | async">
-  <li>
-    <a [routerLink]="['/repos', repo.name]">{{ repo.name }}</a>
-  </li>
-</ul>
+
 
 </div>
