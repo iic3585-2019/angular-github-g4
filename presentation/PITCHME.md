@@ -124,6 +124,27 @@ const weatherData = await fetch(
 
 # Testing
 
+## Unit testing con Karma
+
+Instalar dependencias: **Ya viene todo instalado!**
+
+Configurar experiencia: `karma.conf.js`
+
+Definiciones importantes:
+
+- Fixture: El ambiente del componente
+- DebugElement: El html del componente ya renderizado
+
+**Todo el _boilerplate_ de los tests ya viene hecho **
+
+---
+
+Ejemplos:
+
+---
+
+Y para testear cosas asíncronas: **fakeAsync()**
+
 ---
 
 ## Conclusiones del testing

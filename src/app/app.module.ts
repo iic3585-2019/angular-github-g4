@@ -17,13 +17,15 @@ import { NgxsLoggerPluginModule } from '@ngxs/logger-plugin';
 import { environment } from 'src/environments/environment.prod';
 import { RepoDetailsComponent } from './repo-details/repo-details.component';
 import { CommitsDetailsComponent } from './commits-details/commits-details.component';
+import { AlertButtonComponent } from './alert-button/alert-button.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     SearchUserComponent,
     RepoDetailsComponent,
-    CommitsDetailsComponent
+    CommitsDetailsComponent,
+    AlertButtonComponent
   ],
   imports: [
     BrowserModule,
