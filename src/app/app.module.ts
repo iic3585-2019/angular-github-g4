@@ -16,12 +16,14 @@ import { NgxsReduxDevtoolsPluginModule } from '@ngxs/devtools-plugin';
 import { NgxsLoggerPluginModule } from '@ngxs/logger-plugin';
 import { environment } from 'src/environments/environment.prod';
 import { RepoDetailsComponent } from './repo-details/repo-details.component';
+import { CommitsDetailsComponent } from './commits-details/commits-details.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     SearchUserComponent,
-    RepoDetailsComponent
+    RepoDetailsComponent,
+    CommitsDetailsComponent
   ],
   imports: [
     BrowserModule,
@@ -30,6 +32,8 @@ import { RepoDetailsComponent } from './repo-details/repo-details.component';
     RouterModule.forRoot([
       { path: '', component: SearchUserComponent },
       { path: 'repos/:repo', component: RepoDetailsComponent },
+      { path: 'repos/:repo/commits', component: CommitsDetailsComponent },
+      { path: '**',  redirectTo: '', pathMatch: 'full' },
     ]),
     NgxsModule.forRoot([
       GithubState

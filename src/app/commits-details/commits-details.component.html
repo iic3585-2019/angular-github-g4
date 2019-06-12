@@ -1,0 +1,10 @@
+
+<ul *ngFor="let commit of commits$ | async">
+  <li>
+    {{commit?.name}}
+    ("{{commit?.message }}")
+  </li>
+</ul>
+
+
+<h3 (click)="goBack()">Volver</h3>

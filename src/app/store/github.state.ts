@@ -10,6 +10,9 @@ export interface GithubStateModel {
   isFetching: boolean,
   test: Object,
   currentRepo: Object,
+  currentCommits: Object[],
+  repoFetched: boolean,
+  userFetched: boolean,
 }
 
 const main_url = 'https://api.github.com/';
@@ -23,7 +26,12 @@ const main_url = 'https://api.github.com/';
     repos: [],
     isFetching: false,
     test: {},
-    currentRepo: {},
+    currentRepo: {
+      commits: [],
+    },
+    repoFetched: false,
+    userFetched: false,
+    currentCommits: [],
   }
 })
 
@@ -60,12 +68,25 @@ export class GithubState {
     return state.test;
   }
 
+  @Selector()
+  static commits(state: GithubStateModel) {
+    console.log(state.currentCommits);
+    return state.currentCommits;
+  }
+
+
+  @Selector()
+  static repoFetched(state: GithubStateModel){
+    return state.repoFetched;
+  }
+
   @Action(fetchUser)
   async fetchUser(stateContext: StateContext<GithubStateModel>, action: fetchUser) {
-    stateContext.patchState({ isFetching: true });
+    stateContext.patchState({ isFetching: true, userFetched: false });
     const userData = await fetch(main_url+'users/'+action.payload)
       .then(data => data.json())
       .catch(() => console.log('no user'));
+    console.log(userData);
     const user = { realName: userData.name, avatar: userData.avatar_url, userName: userData.login };
     const reposData = await fetch(userData.repos_url)
       .then(data => data.json())
@@ -73,16 +94,15 @@ export class GithubState {
     if(reposData) {
       const repos = reposData.map(r => ({ name: r.name, url: r.url }));
       stateContext.patchState({ ...user, repos });
+      stateContext.patchState({ userFetched: true });
     }
-    const copy = {...stateContext.getState()};
-    stateContext.setState({ ...copy, test: {... userData}});
-    stateContext.patchState({ isFetching: false });
+    stateContext.patchState({ isFetching: false, test: {...userData} });
   }
 
   @Action(fetchRepo)
   async fetchRepo(stateContext: StateContext<GithubStateModel>, action: fetchUser) {
     
-    stateContext.patchState({ isFetching: true });
+    stateContext.patchState({ isFetching: true, repoFetched: false });
     const copyState = stateContext.getState();
     const url = main_url+'repos/'+copyState.userName+'/'+action.payload;
     console.log("fetch to", url);
@@ -93,18 +113,30 @@ export class GithubState {
       name: repoData.name,
       size: (repoData.size/1024).toFixed(2)+'MB',
       description: repoData.description,
-      createdAt: repoData.createdAt,
-      updatedAt: repoData.updatedAt,
+      createdAt: (new Date(repoData.created_at)).toLocaleString(),
+      updatedAt: (new Date(repoData.updated_at)).toLocaleString(),
       language: repoData.language,
     }
 
-    if(repoData) {
+    if(repoData.name) {
+      console.log("here");
       const commitsData = await fetch(url+'/commits')
         .then(data => data.json());
       repo['commits'] = commitsData.length;
-
+      console.log(commitsData);
+      const commits = commitsData.map(c => {
+        return {
+          name: c.commit.committer.name,
+          message: c.commit.message,
+        }
+      })
+      stateContext.patchState({
+        repoFetched: true,
+        currentCommits: [...commits],
+        currentRepo: {...repo} 
+      });
     }
 
-    stateContext.patchState({ isFetching: false, currentRepo: {...repo} });
+    stateContext.patchState({ isFetching: false});
   }
 }

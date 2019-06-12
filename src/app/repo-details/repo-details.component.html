@@ -1,11 +1,23 @@
 <h4 *ngIf="isFetching$ | async">Cargando...</h4>
-<h3>{{ currentRepo$.name }}</h3>
 
-<p>
-  Tamaño: {{ currentRepo$.size}}
-</p>
-<p>Description: {{currentRepo$.description }}</p>
-<p>
-  Commits: {{currentRepo$.commits }}
-</p>
+<ng-container *ngIf="repoFetched$ | async ">
+  <h3>{{ currentRepo$.name }}</h3>
+  <p>
+    Tamaño: {{ currentRepo$.size }}
+  </p>
+  <p>Description: {{ currentRepo$.description }}</p>
+  <p>Lenguaje: {{ currentRepo$.language }}</p>
+  <p>Creado: {{ currentRepo$.createdAt }}</p>
+  <p>
+    Commits: {{ currentRepo$.commits }} <a [routerLink]="['/repos', currentRepo$.name, 'commits']">(más detalle)</a>
+  </p>
+  <p>Última actualización: {{ currentRepo$.updatedAt }}</p>
+</ng-container>
+
+<ng-container *ngIf="!isFetching && !repoFetched">
+  <p>
+    No pudo obtenerse la información desde Github. 
+    Intente más tarde o busqué otro repositorio desde el home.
+  </p>
+</ng-container>
 <a [routerLink]="['/']">Volver</a>
