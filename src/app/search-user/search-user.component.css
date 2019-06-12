@@ -1,24 +1,19 @@
-button {
-  background-color: blue;
-  color: white;
-  padding: 5px 10px;
-  border: none;
-  display: inline-block;
-  margin: 0px 5px;
-  cursor: pointer;
-}
-
 img {
-  margin: 0px 5px;
+  margin: 0.5em;
 }
 
 label {
   width: 30%;
-  display: inline-block;
+  
+}
+
+input {
+  margin: 0;
 }
 
 .container-form {
   display: flex;
-  align-items: center;
+  /* justify-content: space-between; */
   align-content: flex-start;
+  flex-wrap: wrap;
 }

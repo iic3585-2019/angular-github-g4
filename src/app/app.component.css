@@ -1,0 +1,14 @@
+h1 {
+  background-color: blue;
+  color: white;
+  display: inline;
+  padding: 0.2em 1em;
+  
+}
+
+.top-bar{
+  background-color: blue;
+  display: flex;
+  margin: 0em 0em 1em;
+}
+
