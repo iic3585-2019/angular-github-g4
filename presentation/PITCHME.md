@@ -18,41 +18,13 @@ marp: true
 
 # Puntos principales
 
-- Angular
-  - Componentes
-  - Angular vs Vue vs React
-- NGXS
-- API
+- Angular vs Vue vs React
 - Testing
   - Unit Testing con Karma
 
 ---
 
-# Angular
-
-Aspectos importantes utilizados en la aplicación
-
----
-
-## Components
-
-Archivos `.vue` que contienen toda la estructura de un componente (HTML, JS, CSS)
-
-```
-
-```
-
----
-
 # Angular vs Vue vs React
-
-# ![](./VueVsReact.png)
-
----
-
-## Similitudes
-
----
 
 ## Diferencias
 
@@ -61,34 +33,6 @@ Archivos `.vue` que contienen toda la estructura de un componente (HTML, JS, CSS
 - La mayoría de las utilidades vienen instaladas y configuradas
 - El más pesado de los tres
 - Uso de TypeScript
-
----
-
-# NGXS
-
-- Quitar todo el _boilerplate_ de NGRX
-
----
-
-## Principios a tener en cuenta
-
-- Los mismos de Redux!
--
-
----
-
-# API
-
-Versión gratuita de [OpenWeatherMap](https://openweathermap.org/api)
-
-```javascript
-const weatherData = await fetch(
-  `http://api.openweathermap.org/data/2.5/weather?id=${id}&APPID=${
-    process.env.VUE_APP_APP_ID
-  }&units=${scale.param}`
-).then(data => data.json());
-```
-
 ---
 
 # Testing
@@ -212,6 +156,7 @@ Ranking final en testing:
 - Requiere de más estudio para aprender las _conventions_
 - Buenas herramientas para el _developer_: CLI, DevTools, etc
 - Útil en un ambiente empresarial
+- Redux útil para aplicaciones más grandes, pero para más pequeñas `services` es más que suficiente
 
 ---
 
